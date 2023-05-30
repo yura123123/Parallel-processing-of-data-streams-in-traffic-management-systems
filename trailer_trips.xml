@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2023-05-18 03:44:28.438191 by randomTrips.py v1_17_0+0293-f7f0a5c6e6a
+<configuration>
+    <net-file value="map.net.xml"/>
+    <output-trip-file value="trailer_trips.xml"/>
+    <route-file value="trailer_routes.rou.xml"/>
+    <trip-attributes value="color=&quot;223,179,180&quot; accel=&quot;0.5&quot;"/>
+    <vehicle-class value="trailer"/>
+    <period value="150.0"/>
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="trailer" vClass="trailer" color="223,179,180" accel="0.5"/>
+    <trip id="0" depart="0.00" from="352399687" to="-158031379#1" type="trailer"/>
+    <trip id="1" depart="150.00" from="139932906" to="-965353311" type="trailer"/>
+    <trip id="2" depart="300.00" from="41461196#3" to="391341941#0" type="trailer"/>
+    <trip id="3" depart="450.00" from="641491652#0" to="-24567417#2" type="trailer"/>
+    <trip id="4" depart="600.00" from="183555573#0" to="-158551373#4" type="trailer"/>
+    <trip id="5" depart="750.00" from="-661300188" to="24567355#0" type="trailer"/>
+    <trip id="6" depart="900.00" from="-158031379#2" to="-641236159#1" type="trailer"/>
+    <trip id="7" depart="1050.00" from="353982926" to="253498831" type="trailer"/>
+    <trip id="8" depart="1200.00" from="-696378835#2" to="32847601#3" type="trailer"/>
+    <trip id="9" depart="1350.00" from="47932115#0" to="-1154607033#1" type="trailer"/>
+    <trip id="10" depart="1500.00" from="4774858#1" to="39763728#4" type="trailer"/>
+    <trip id="11" depart="1650.00" from="161250666#2" to="-42365366#2" type="trailer"/>
+    <trip id="12" depart="1800.00" from="85335691#0" to="161701601#2" type="trailer"/>
+    <trip id="13" depart="1950.00" from="-24567417#2" to="-253498835#3" type="trailer"/>
+    <trip id="14" depart="2100.00" from="58261605" to="33868769#1" type="trailer"/>
+    <trip id="15" depart="2250.00" from="4774858#3" to="41415491" type="trailer"/>
+    <trip id="16" depart="2400.00" from="249266523#0" to="87125871#1" type="trailer"/>
+    <trip id="17" depart="2550.00" from="169049971#0" to="253498835#5" type="trailer"/>
+    <trip id="18" depart="2700.00" from="57379037#0" to="348362922#1" type="trailer"/>
+    <trip id="19" depart="2850.00" from="640145102#0" to="32608459#1" type="trailer"/>
+    <trip id="20" depart="3000.00" from="39771938#2" to="-161898369#1" type="trailer"/>
+    <trip id="21" depart="3150.00" from="-860642307#2" to="152451713#0" type="trailer"/>
+    <trip id="22" depart="3300.00" from="-186048369#0" to="1015481156#0" type="trailer"/>
+    <trip id="23" depart="3450.00" from="-253498835#0" to="150812653#0" type="trailer"/>
+</routes>

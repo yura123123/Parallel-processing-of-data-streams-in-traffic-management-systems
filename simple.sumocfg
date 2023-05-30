@@ -1,0 +1,20 @@
+<configuration>
+	<input>
+		<net-file value="map.net.xml"/>
+		<route-files value="truck_routes.rou.xml, passenger_routes.rou.xml, bus_routes.rou.xml, trailer_routes.rou.xml, delivery_routes.rou.xml"/>
+		<additional-files value="map.poly.xml"/>
+	</input>
+
+	<time>
+    	<begin value="0"/>
+    	<end value="10000"/>
+  	</time>
+
+
+ 	<gui_only>
+        <gui-settings>
+            <scale value="1"/>
+			<delay value="150"/>
+        </gui-settings>
+    </gui_only>
+</configuration>

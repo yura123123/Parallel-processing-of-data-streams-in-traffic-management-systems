@@ -1,0 +1,65 @@
+import sumolib
+import traci
+import numpy as np
+import pycuda.driver as cuda
+import pycuda.autoinit
+from pycuda.compiler import SourceModule
+
+# Load SUMO network and start simulation
+sumo_cmd = ["sumo", "-c", "simple.sumocfg"]
+traci.start(sumo_cmd)
+traci.simulationStep(100)
+# Get the number of vehicles in the simulation
+num_vehicles = traci.vehicle.getIDCount()
+
+# Initialize positions on the CPU
+positions_cpu = np.zeros((num_vehicles, 2), dtype=np.float32)
+
+# Create GPU memory for positions
+positions_gpu = cuda.mem_alloc(positions_cpu.nbytes)
+
+# CUDA kernel for updating vehicle positions
+cuda_kernel = """
+__global__ void update_positions(float2* positions, int num_vehicles) {
+    int tid = blockIdx.x * blockDim.x + threadIdx.x;
+    if (tid < num_vehicles) {
+        positions[tid].x = traci.vehicle.getPosition(tid)[0];
+        positions[tid].y = traci.vehicle.getPosition(tid)[1];
+    }
+}
+"""
+
+# Compile the CUDA kernel
+mod = SourceModule(cuda_kernel)
+
+# Get the function from the compiled module
+update_positions_gpu = mod.get_function("update_positions")
+
+# Set the number of threads per block
+block_size = 128
+
+# Simulation loop
+while traci.simulation.getMinExpectedNumber() > 0:
+    # Get the updated number of vehicles
+    num_vehicles = traci.vehicle.getIDCount()
+
+    # Resize GPU memory if the number of vehicles has changed
+    if num_vehicles != positions_cpu.shape[0]:
+        # Free existing GPU memory
+        positions_gpu.free()
+
+        # Allocate new GPU memory for positions
+        positions_cpu = np.zeros((num_vehicles, 2), dtype=np.float32)
+        positions_gpu = cuda.mem_alloc(positions_cpu.nbytes)
+
+    # Update vehicle positions using GPU parallelism
+    update_positions_gpu(positions_gpu, np.int32(num_vehicles), block=(block_size, 1, 1))
+
+    # Copy updated positions from GPU to CPU
+    cuda.memcpy_dtoh(positions_cpu, positions_gpu)
+
+    # Advance the simulation
+    traci.simulationStep()
+
+# End simulation and clean up
+traci.close()
